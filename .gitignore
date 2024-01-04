@@ -1,0 +1,4 @@
+# Ide files
+/.idea
+# weights
+ai_images_survey/TestModels/CNNDetection/weights/blur_jpg_prob0.5.pth
