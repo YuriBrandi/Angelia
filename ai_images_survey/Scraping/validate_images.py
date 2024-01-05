@@ -34,7 +34,7 @@ def delete_empty_folder(directory_path):
         os.rmdir(directory_path)
 
 
-df = pd.read_csv('DatasetFakeNewsImagesWithUrl.csv')
+df = pd.read_csv('csv/DatasetFakeNewsImagesWithUrl.csv')
 
 for i in range(0, df.shape[0]):
     directory_path = f"FakeNewsImagesDataset/{i}"
