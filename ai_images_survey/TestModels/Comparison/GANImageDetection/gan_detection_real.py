@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv('../../AiImageDetector/csv/ResultsAiDetectorFake.csv')
+df = pd.read_csv('../../GANImageDetection/csv/ResultsGANReal.csv')
 
 df_filtered0 = df[df['%Syntetic'] <= 25]
 df_filtered1 = df[(df['%Syntetic'] > 25) & (df['%Syntetic'] <= 50)]
@@ -19,7 +19,7 @@ new_df = new_df.sort_values(by='Percentage', ascending=True)
 
 plt.figure(figsize=(12, 9))
 plt.barh(new_df['Entry'], new_df['Percentage'])
-plt.title('Percentuale di immagini reali con probabilità di essere sintetiche (AI Image Detector)', fontsize=16)
+plt.title('Percentuale di immagini reali con probabilità di essere sintetiche (GAN Image Detection)', fontsize=16)
 plt.xlabel('Percentuale rispetto al totale delle immagini per ciascun gruppo (0-1)', fontsize=14)
 plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)

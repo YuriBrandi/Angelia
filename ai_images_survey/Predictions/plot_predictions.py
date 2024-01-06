@@ -31,6 +31,6 @@ plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
 plt.show()
 
-# new_df.to_csv('csv/PredictionFakeNewsImagesCNN50.csv', index=False)
+new_df.to_csv('csv/PredictionFakeNewsImagesCNN50.csv', index=False)
 
 

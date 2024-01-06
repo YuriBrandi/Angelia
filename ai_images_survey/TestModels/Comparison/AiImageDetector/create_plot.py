@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 def plot_0_25(df_original):
@@ -25,6 +26,12 @@ def plot_75_100(df_original):
     _plot(grouped_df, 75, 100)
 
 
+def plot_50_100(df_original):
+    df_filtered = df_original[(df_original['%Syntetic'] <= 100) & (df_original['%Syntetic'] > 50)]
+    grouped_df = _new_dataframe_for_plot(df_original, df_filtered)
+    _plot(grouped_df, 50, 100)
+
+
 def _new_dataframe_for_plot(df_original, df_filtered):
     # create new dataframe for plot
     grouped_df = df_filtered.groupby('Model').size().reset_index(name='Count')
@@ -40,8 +47,12 @@ def _new_dataframe_for_plot(df_original, df_filtered):
 def _plot(grouped_df, range1, range2):
     plt.figure(figsize=(12, 9))
     plt.barh(grouped_df['Model'], grouped_df['Percentage'])
-    plt.title(f'Percentuale di immagini sintetiche con probabilità {range1} <= p < {range2} (Ai-image-detector)',
-              fontsize=16)
+    if range1 == 0 and range2 == 25:
+        plt.title(f'Percentuale di immagini sintetiche con probabilità {range1} <= p < {range2} (Ai Image Detector)',
+                  fontsize=16)
+    else:
+        plt.title(f'Percentuale di immagini sintetiche con probabilità {range1} < p <= {range2} (Ai Image Detector)',
+                  fontsize=16)
     plt.xlabel('Percentuale rispetto al totale delle immagini per ciascun gruppo (0-1)', fontsize=14)
     plt.xticks(fontsize=14)
     plt.yticks(fontsize=14)
