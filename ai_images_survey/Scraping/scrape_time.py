@@ -16,17 +16,19 @@ async def main(url):
     time_tag_info = None
 
     time_tag_info = await page.evaluate('''() => {
-               const timeElement = document.querySelector('time');
-               if (timeElement) {
-                   return { datetime: timeElement.getAttribute('datetime') };
-               }
-               return null;
-           }''')
+                const timeElement = document.querySelector('time');
+                if (timeElement) {
+                    const datetimeAttr = timeElement.getAttribute('datetime');
+                    const textContent = timeElement.textContent;
+                    return { datetime: datetimeAttr, textContent: textContent };
+                }
+                return null;
+            }''')
 
     datetime_value = None
 
     if time_tag_info:
-        datetime_value = time_tag_info['datetime']
+        datetime_value = time_tag_info['datetime'] or time_tag_info['textContent']
 
     await browser.close()
     return datetime_value
