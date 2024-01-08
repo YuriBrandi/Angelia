@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv('csv/PredictionsFakeNewsImagesCNN.csv')
+df = pd.read_csv('csv/PredictionFakeNewsImages.csv')
 
 new_df = {'Index': [], 'File_name': [], 'Link_news': [], 'Topic': [], 'Date': [], '%Syntetic': []}
 
@@ -31,6 +31,6 @@ plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
 plt.show()
 
-new_df.to_csv('csv/PredictionFakeNewsImagesCNN50.csv', index=False)
+new_df.to_csv('csv/PredictionFakeNewsImagesDrop.csv', index=False)
 
 
