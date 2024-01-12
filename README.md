@@ -17,7 +17,24 @@ Contributions are very much appreciated. Please well describe your changes insid
 
 If you encounter any problem or bug that is unrelated with your own machine, please report it and *open a new issue* with replicable steps. 
 
-## How does it work
+## Workflow
+
+This work will be followed by a scientific paper, thus technical information won't be covered in this readme.
+
+*Angelia* consist of 4 main modules:
+
+- A Sentiment Analysis module
+- A Tokenization module
+- A title extraction module
+- A reliability evaluation module
+
+![Angelia-EnglishW](https://github.com/YuriBrandi/Angelia/assets/52039988/d11fe413-e9fe-46cd-95db-cb13eaf21fb1)
+
+1. The extension extracts the title, and tokenizes it to facilitate News search via the API.
+2. Each result is filtered by hostname through a list of **TNS** (Trusted News Sites).
+3. The sentiment of the original title is compared to the one of the filtered news, this allows the polarity of news' titles to be compared.
+
+The reliability evaluation model is in continuous development. At the moment, the polarity of each news is compared and a negativity score is given. When faced with negative-polarity comparisons, the extensions checks for words of disagreement such as "No, ...." Or "Fake ...".
 
 ## How to install the extension
 
