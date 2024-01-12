@@ -4,9 +4,12 @@
     "version": "1.0",
   
     "description": "A Fake news detector based on NLP Machine Learning models.",
+    "homepage_url": "https://github.com/YuriBrandi/Angelia",
   
     "permissions": [
-      "tabs"
+      "activeTab",
+      "webRequest",
+      "https://api.search.brave.com/res/v1/web/search"
     ],
 
     "icons": {
@@ -20,18 +23,17 @@
       "default_title": "Is this news Fake?",
       "default_popup": "popup/index.html"
     },
-  
+
     "content_scripts": [
       {
         "matches": [
           "<all_urls>"
         ],
         "js": [
-          "js/find_title.js"
+          "js/require.js", "js/sentiment_bundled.js"
         ],
-        "all_frames": false,
-        "run_at": "document_idle"
+        "run_at": "document_end"
       }
     ]
-  }
+}
   
