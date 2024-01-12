@@ -25,8 +25,8 @@ This work will be followed by a scientific paper, thus technical information won
 
 - A Sentiment Analysis module
 - A Tokenization module
-- A title extraction module
-- A reliability evaluation module
+- A Title detection module
+- A Reliability Evaluation module
 
 ![Angelia-EnglishW](https://github.com/YuriBrandi/Angelia/assets/52039988/d11fe413-e9fe-46cd-95db-cb13eaf21fb1)
 
