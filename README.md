@@ -28,6 +28,8 @@ This work will be followed by a scientific paper, thus technical information won
 - A Title detection module
 - A Reliability Evaluation module
 
+#### Note: All these modules are exectued in local and require no external requests.
+
 ![Angelia-EnglishW](https://github.com/YuriBrandi/Angelia/assets/52039988/d11fe413-e9fe-46cd-95db-cb13eaf21fb1)
 
 1. The extension extracts the title, and tokenizes it to facilitate News search via the API.
