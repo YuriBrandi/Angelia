@@ -36,7 +36,7 @@ This work will be followed by a scientific paper, thus technical information won
 
 The reliability evaluation model is in continuous development. At the moment, the polarity of each news is compared and a negativity score is given. When faced with negative-polarity comparisons, the extensions checks for words of disagreement such as "No, ...." Or "Fake ...".
 
-## How to install the extension
+## Installing the extension 
 
 Since it is still in an early stage development, at the moment *Angelia* is still not available in the Extensions store. But we plan to migrate to Manifest v3 and to port the work to *Chromium* browsers soon.
 
