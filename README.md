@@ -54,6 +54,7 @@ Please feel free to try different APIs and let us know :).
 Finally go to [about:debugging](about:debugging) in your Firefox (or Firefox-based) browser and add the extension from ```Angelia/angelia_extension/manifest.json```.
 
 ## References
+This repository borrows partially from [CNNDetection](https://github.com/PeterWang512/CNNDetection) and [GANImageDetection](https://github.com/grip-unina/GANimageDetection) repositories.
 
 ## License
 
