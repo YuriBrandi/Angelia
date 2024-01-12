@@ -3,7 +3,8 @@
 ### A Fake news detector based on NLP Machine Learning models.
 
 <p align='center'> 
-    <img src=https://github.com/musimathicslab/JAMintheMLoop/assets/52039988/7bf38b1c-293b-4662-a5aa-34a35c9f7703 width=200>
+
+    <img src=https://github.com/YuriBrandi/Angelia/assets/52039988/fe187280-24c1-4878-b211-98daf4e485d4 width=200>
 </p>
 
 ### Authors
