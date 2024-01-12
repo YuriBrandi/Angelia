@@ -40,6 +40,6 @@ Finally go to [about:debugging](about:debugging) in your Firefox (or Firefox-bas
 
 ## License
 
-This project is distributed under the [GNU General Public License v3](LICENSE.md).
+This project is distributed under the [GNU General Public License v3](LICENSE).
 
 ![GPLv3Logo](https://www.gnu.org/graphics/gplv3-127x51.png)
