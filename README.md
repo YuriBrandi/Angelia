@@ -25,7 +25,7 @@ This work will be followed by a scientific paper, thus technical information won
 
 - A Sentiment Analysis module
 - A Tokenization module
-- A Title detection module
+- A Title Extraction module
 - A Reliability Evaluation module
 
 #### Note: All these modules are exectued in local and require no external requests.
