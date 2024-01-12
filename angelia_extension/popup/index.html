@@ -1,17 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
   <head>
     <title>Angelia Fake News Detector</title>
     <link rel="stylesheet" href="css/index.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no"
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no"
     />
   </head>
-  <body>
-    <p>Title detected:</p>
-    <button id="find">Find head</button>
-    <script src="/js/find_title.js"></script>
-  </body>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <span class="label">Detected title:</span>
+    <span id="label_title"></span>
+    <input type="text" id="title_txt">
+
+    <div id="tip_container">
+      <img src="imgs/info.svg">
+      <span id="tip">Don't worry, special characters and site's name in the title will be automatically ignored.</span>
+    </div>
+
+    <button class="edit"><img src="imgs/edit.svg"></button>
+    <button class="edit"><img src="imgs/done.svg"></button>
+    <button class="edit"><img src="imgs/close.svg"></button>
+  </div>
+  <div class="row">
+    <button id="do_btn">Get trust score!</button>
+  </div>
+  <div class="row">
+    <p id="output"></p>
+  </div>
+  <footer>Angelia &copy; 2024. Raffaele Aurucci, Lukasz Gajewski, Yuri Brandi.</footer>
+</div>
+</body>
+<script src="js/find_title.js"></script>
 </html>
