@@ -3,12 +3,11 @@
 ### A Fake news detector based on NLP Machine Learning models.
 
 <p align='center'> 
-
     <img src=https://github.com/YuriBrandi/Angelia/assets/52039988/fe187280-24c1-4878-b211-98daf4e485d4 width=200>
 </p>
 
 ### Authors
-@raffaele-aurucci, @LukaszG92, @YuriBrandi.
+[@raffaele-aurucci](https://github.com/raffaele-aurucci), [@LukaszG92](https://github.com/LukaszG92), [@YuriBrandi](https://github.com/YuriBrandi).
 
 This University work consists of an in-depth study and a fully working Firefox Extension inspired by the earlier paper [ConvNet frameworks for multi-modal fake news detection](https://link.springer.com/article/10.1007/s10489-021-02345-y), which uses trusted sources and polarity analysis for fake news detection.
 
