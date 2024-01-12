@@ -215,7 +215,7 @@
 
                     browser.runtime.sendMessage({
                         command: "getNegScore",
-                        neg_score: 4
+                        neg_score: neg_score
                     });
 
 
