@@ -19,6 +19,10 @@ If you encounter any problem or bug that is unrelated with your own machine, ple
 
 ## Workflow
 
+<p align='center'> 
+    <img width="589" src="https://github.com/YuriBrandi/Angelia/assets/52039988/d2ceddf1-c1dd-48be-8d79-4f3a8e19a937">
+</p>
+
 This work will be followed by a scientific paper, thus technical information won't be covered in this readme.
 
 *Angelia* consist of 4 main modules:
