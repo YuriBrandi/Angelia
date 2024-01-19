@@ -19,14 +19,20 @@ If you encounter any problem or bug that is unrelated with your own machine, ple
 
 ## Workflow
 
+<p align='center'> 
+    <img width="589" src="https://github.com/YuriBrandi/Angelia/assets/52039988/d2ceddf1-c1dd-48be-8d79-4f3a8e19a937">
+</p>
+
 This work will be followed by a scientific paper, thus technical information won't be covered in this readme.
 
 *Angelia* consist of 4 main modules:
 
 - A Sentiment Analysis module
 - A Tokenization module
-- A title extraction module
-- A reliability evaluation module
+- A Title Extraction module
+- A Reliability Evaluation module
+
+#### Note: All these modules are exectued in local and require no external requests.
 
 ![Angelia-EnglishW](https://github.com/YuriBrandi/Angelia/assets/52039988/d11fe413-e9fe-46cd-95db-cb13eaf21fb1)
 
@@ -36,7 +42,7 @@ This work will be followed by a scientific paper, thus technical information won
 
 The reliability evaluation model is in continuous development. At the moment, the polarity of each news is compared and a negativity score is given. When faced with negative-polarity comparisons, the extensions checks for words of disagreement such as "No, ...." Or "Fake ...".
 
-## How to install the extension
+## Installing the extension 
 
 Since it is still in an early stage development, at the moment *Angelia* is still not available in the Extensions store. But we plan to migrate to Manifest v3 and to port the work to *Chromium* browsers soon.
 
@@ -51,9 +57,10 @@ Getting an API token is fairly simple and also free https://brave.com/search/api
 
 Please feel free to try different APIs and let us know :).
 
-Finally go to [about:debugging](about:debugging) in your Firefox (or Firefox-based) browser and add the extension from ```Angelia/angelia_extension/manifest.json```.
+Finally go to ```about:debugging``` in your Firefox (or Firefox-based) browser and add the extension from ```Angelia/angelia_extension/manifest.json```.
 
 ## References
+This repository borrows partially from [CNNDetection](https://github.com/PeterWang512/CNNDetection) and [GANImageDetection](https://github.com/grip-unina/GANimageDetection) repositories.
 
 ## License
 
