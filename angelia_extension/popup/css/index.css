@@ -33,10 +33,7 @@ body {
 
 .label, #label_title {
   margin-right: 5px;
-}
-
-#label_title {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 #title_txt {
@@ -47,15 +44,27 @@ body {
 button {
   font-size: 1.3rem;
   cursor: pointer;
-  border: 1px solid #88c;
-  border-radius: 4px;
-  padding: .7rem
+  /*border: 1px solid #88c;*/
+  border: none;
+  background-color: white;
+  color: black;
+  border-radius: 9px;
+  padding: .8rem 2rem;
+
+  transition: box-shadow 0.5s ease-out;
+  box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+}
+
+button:hover {
+  box-shadow: none;
 }
 
 .edit {
   padding: .3rem;
   font-size: .5rem;
-  color: white;
+  /*color: white;*/
+  background-color: transparent; /*CHECK*/
+  box-shadow: none;
   display: none;
 }
 
@@ -77,11 +86,8 @@ button {
 
 #tip {
   display: none;
-  font-size: .8rem;
-  background-color: black;
+  font-size: .5rem;
   text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
 
   /* Position the tooltip */
   position: absolute;
