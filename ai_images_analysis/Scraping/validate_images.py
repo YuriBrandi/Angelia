@@ -37,6 +37,6 @@ def delete_empty_folder(directory_path):
 df = pd.read_csv('csv/FakeNewsImagesWithUrlDataset.csv')
 
 for i in range(0, df.shape[0]):
-    directory_path = f"FakeNewsImagesDataset/{i}"
+    directory_path = f"FakeNewsImagesDataset/{str(df.loc[i]['Index'])}"
     # delete_empty_folder(directory_path)
     delete_unopenable_images(directory_path)
