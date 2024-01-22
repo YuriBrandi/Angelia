@@ -85,7 +85,7 @@ def iter_folder(index, link, topic, date, folder, prediction_function):
     print(index)
 
 
-df = pd.read_csv('../Scraping/csv/DatasetFakeNewsImagesWithUrl.csv')
+df = pd.read_csv('../Scraping/csv/FakeNewsImagesWithUrlDataset.csv')
 
 for i in range(0, df.shape[0]):
     index = df.loc[i]['Index']

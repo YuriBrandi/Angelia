@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv('csv/DatasetFakeNewsImagesWithUrl.csv')
+df = pd.read_csv('csv/FakeNewsImagesWithUrlDataset.csv')
 
 for i in range(0, df.shape[0]):
     year = str(df.loc[i]['Date']).split('-')[0]
