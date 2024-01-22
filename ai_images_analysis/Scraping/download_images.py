@@ -20,9 +20,7 @@ def download_images(img_url, folder):
         img_file.write(img_data)
 
 
-df = pd.read_csv('csv/FakeNewsTopicLinkDateImagesUrlDataset.csv')
-df.insert(0, 'Index', range(0, df.shape[0]))
-df.to_csv('csv/FakeNewsImagesWithUrlDataset.csv', index=False)
+df = pd.read_csv('csv/FakeNewsImagesWithUrlDataset.csv')
 
 for i in range(0, df.shape[0]):
     print(i)

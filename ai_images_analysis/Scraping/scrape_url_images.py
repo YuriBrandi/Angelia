@@ -44,4 +44,4 @@ for i in range(0, df.shape[0]):
     except Exception as e:
         print(e)
 
-df.to_csv('csv/FakeNewsTopicLinkDateImagesUrlDataset.csv', index=False)
+df.to_csv('csv/FakeNewsImagesWithUrlDataset.csv', index=False)
