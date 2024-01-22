@@ -3,6 +3,7 @@ import re
 import pandas as pd
 import requests
 
+
 def download_images(img_url, folder):
     if not os.path.exists(folder):
         os.makedirs(folder)
@@ -13,13 +14,15 @@ def download_images(img_url, folder):
     basename = os.path.splitext(basename)[0]
     basename = re.sub(r'[^a-zA-Z0-9_.-]', '_', basename)
 
-    img_path = os.path.join(folder, basename+'.png')
+    img_path = os.path.join(folder, basename + '.png')
 
     with open(img_path, 'wb') as img_file:
         img_file.write(img_data)
 
 
-df = pd.read_csv('name_dataset.csv')
+df = pd.read_csv('csv/FakeNewsTopicLinkDateImagesUrlDataset.csv')
+df.insert(0, 'Index', range(0, df.shape[0]))
+df.to_csv('csv/FakeNewsImagesWithUrlDataset.csv', index=False)
 
 for i in range(0, df.shape[0]):
     print(i)

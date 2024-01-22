@@ -34,7 +34,7 @@ async def main(url):
     return datetime_value
 
 
-df = pd.read_csv('name_dataset.csv')
+df = pd.read_csv('csv/FakeNewsTopicLinkDataset.csv')
 df['Date'] = [None] * df.shape[0]
 
 for i in range(0, df.shape[0]):
@@ -48,4 +48,4 @@ for i in range(0, df.shape[0]):
     except Exception as e:
         pass
 
-df.to_csv('new_name_dataset.csv', index=False)
+df.to_csv('csv/FakeNewsTopicLinkDateDataset.csv', index=False)
