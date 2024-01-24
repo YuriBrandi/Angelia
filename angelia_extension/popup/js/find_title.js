@@ -107,6 +107,6 @@ browser.tabs.executeScript({file: "/js/message_handler.js"})
 
 browser.runtime.onMessage.addListener((message) => {
    if(message.command === "getNegScore") {
-       document.getElementById("output").innerHTML = "Negativity Score: " + message.neg_score;
+       document.getElementById("output").innerHTML = "Negativity Score: " + message.neg_score + "/100";
    }
 });
