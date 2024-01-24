@@ -77,10 +77,11 @@
 
     function filterArrayByTrusted(array){
         let filteredHostnames = [];
-        for(let element in array){
+        for(let element of array){
             if(trustedSites.includes(element[0]))
-                filteredHostnames.push(element[0]);
+                filteredHostnames.push(element); //Push all array
         }
+
         console.log("Trusted entries # (filtered): " + filteredHostnames.length);
         return filteredHostnames;
     }
@@ -100,14 +101,17 @@
             Final negativity score = number of contradicting news/number of evaluated news.
          */
         let contradictory_score = 0;
-        for(let element in filteredArray){
+        
+        for(let element of filteredArray){
+            //console.log(element);
             let sentiment = getSentiment( //Element[1] contains news' title, Element[0] contains news' hostname.
-                tokenize(element[1], extractDomains(element[0])));
+                tokenize(element[1], element[0].split('.'))); //extractDomain call not needed as element[0] is already a hostname.
 
             //If sentiments are contradicting, then increase score.
             if((sentiment < 0 && titleSentiment > 0)
                 || (sentiment > 0 && titleSentiment < 0))
                 contradictory_score++;
+            
 
             /*
                 From our study, titles can be both negative but still contradicting
@@ -122,11 +126,12 @@
             else if(titleSentiment < 0 && sentiment < 0
                 && titleAffirmation !== isTitleAffirmative(element[1]))
                 contradictory_score++;
-        }
 
+        }
+        
         console.log("Contradictory score: " + contradictory_score);
         
-        return contradictory_score/filteredArray.length;
+        return Math.round((contradictory_score/filteredArray.length)*100);
     }
 
     async function doSearchQuery(sentence) {
