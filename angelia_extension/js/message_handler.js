@@ -81,7 +81,7 @@
             if(trustedSites.includes(element[0]))
                 filteredHostnames.push(element[0]);
         }
-
+        console.log("Trusted entries # (filtered): " + filteredHostnames.length);
         return filteredHostnames;
     }
 
@@ -91,6 +91,7 @@
             hostnames.push([jsonResults.web.results[i].meta_url.hostname, jsonResults.web.results[i].title]);
             //console.log(jsonResults.web.results[i].meta_url.hostname); Debug
 
+        console.log("# Total entries: " + hostnames.length);
         return hostnames;
     }
 
@@ -123,6 +124,8 @@
                 contradictory_score++;
         }
 
+        console.log("Contradictory score: " + contradictory_score);
+        
         return contradictory_score/filteredArray.length;
     }
 
