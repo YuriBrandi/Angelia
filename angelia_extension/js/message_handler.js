@@ -130,6 +130,9 @@
         }
         
         console.log("Contradictory score: " + contradictory_score);
+
+        if(filteredArray.length == 0)
+            return 0;
         
         return Math.round((contradictory_score/filteredArray.length)*100);
     }
