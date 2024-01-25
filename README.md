@@ -1,4 +1,4 @@
-# Angelia: 
+# Angelia (/aŋ.ɟeˈli.a/):
 
 ### A Fake news detector based on NLP Machine Learning models.
 
