@@ -10,7 +10,8 @@
       "activeTab",
       "webRequest",
       "https://api.search.brave.com/res/v1/web/search",
-      "https://www.googleapis.com/customsearch/v1"
+      "https://api-inference.huggingface.co/models/Organika/sdxl-detector",
+      "https://corsproxy.io/"
     ],
 
     "icons": {

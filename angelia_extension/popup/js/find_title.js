@@ -96,17 +96,24 @@ function changeTitleText(tabs) {
 
 function checkNews(tabs){
 
+
+    document.getElementById('preContainerImg').innerHTML = "";
+    document.getElementById("do_btn").style.display = "none";
+    document.getElementById("loading_circle").style.display = "inline";
+    document.getElementById("urls").innerHTML = "";
+    document.getElementById("output").innerHTML = "";
+
+
+    document.getElementById("do_img").style.display = "none";
+    document.getElementById("btn_text").style.display = "none";
+
     browser.tabs.sendMessage(tabs[0].id, {
         command: "check_news",
         news_title: document.getElementById("label_title").innerHTML,
         news_url: tabs[0].url
     });
-
     console.log("Message sent");
 
-    document.getElementById("do_btn").style.display = "none";
-    document.getElementById("loading_circle").style.display = "inline";
-    document.getElementById("urls").innerHTML = "";
 
 }
 
@@ -139,6 +146,8 @@ browser.tabs.executeScript({file: "/js/message_handler.js"})
 browser.runtime.onMessage.addListener((message) => {
    if(message.command === "getNegScore") {
        document.getElementById("do_btn").style.display = "inline";
+       document.getElementById("do_img").style.display = "inline";
+       document.getElementById("btn_text").style.display = "inline";
        document.getElementById("loading_circle").style.display = "none";
 
        console.log("Negativity score: " + message.neg_score + "/100");
@@ -183,5 +192,14 @@ browser.runtime.onMessage.addListener((message) => {
            if(element !== message.filteredURLs[message.filteredURLs.length - 1])
                document.getElementById("urls").appendChild(document.createElement("br"));
        }
+   }
+   else if(message.command === "brave_nil"){
+       document.getElementById("do_btn").style.display = "inline";
+       document.getElementById("do_img").style.display = "inline";
+       document.getElementById("btn_text").style.display = "inline";
+       document.getElementById("loading_circle").style.display = "none";
+
+       document.getElementById("output").innerHTML = "Check for BRAVE API key and Internet connection.";
+       document.getElementById("output").style.color = "red";
    }
 });

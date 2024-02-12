@@ -200,9 +200,11 @@
             })
             .catch(error => {
                 console.error('Fetch error:', error);
+                console.error("CHECK FOR BRAVE API KEY and Internet connection.");
+                return null;
             });
 
-        return json_data
+        return json_data;
 
     }
 
@@ -270,6 +272,12 @@
                     //do Brave Search with Async function
                     doSearchQuery(tokenized_title)
                         .then(data => {
+                            if(data == null){
+                                browser.runtime.sendMessage({
+                                    command: "brave_nil",
+                                });
+                            }
+
                             //Reduce the json to an array of [hostname, title]
                             let simple_array = getSimplifiedArray(data);
                             //console.log(hostnames);
