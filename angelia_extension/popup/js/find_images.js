@@ -1,5 +1,3 @@
-let tabsID = null;
-
 document.getElementById('do_img').addEventListener('click', function() {
 
     document.getElementById("urls").innerHTML = ""
@@ -11,18 +9,17 @@ document.getElementById('do_img').addEventListener('click', function() {
     document.getElementById('btn_text').style.display = 'none'
     document.getElementById('loading_circle').style.display = 'inline'
 
+    const container = document.getElementById('preContainerImg');
+    container.innerHTML = ""
+
     browser.tabs.query({active: true, currentWindow: true})
         .then(tabs => {
 
-            if (tabsID !== tabs[0].id) { //execute 1 time for each tab
-                tabsID = tabs[0].id
-                console.log('Message sent')
+            console.log('Message sent')
 
-                browser.tabs.sendMessage(tabs[0].id, {
-                    command: "image_detection",
-                    value: true });
-
-            }
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "image_detection",
+                value: true });
 
         }).catch(error => console.log(error));
 });
@@ -40,6 +37,7 @@ browser.runtime.onMessage.addListener((message) => {
     }
     else if (message.command === "rateLimitReached"){
         console.log(message.detections)
+        rateLimitReached()
     }
 });
 
@@ -47,7 +45,11 @@ function rateLimitReached(){
     document.getElementById('loading_circle').style.display = 'none'
     document.getElementById('output').style.display = 'inline'
     document.getElementById('do_btn').style.display = 'inline'
+    document.getElementById('do_img').style.display = 'inline'
     document.getElementById('btn_text').style.display = 'inline'
+
+    const container = document.getElementById('preContainerImg');
+    container.innerHTML = ""
 
     document.getElementById('output').innerText = 'Rate Limit Reached, Subscribe API Key to Hugging Face or ' +
         'attend 1 hour for reset.'
@@ -61,7 +63,6 @@ function addImagesToPopup(message){
     document.getElementById('btn_text').style.display = 'inline'
 
     const container = document.getElementById('preContainerImg');
-
     container.innerHTML = ""
 
     let images = JSON.parse(message)
