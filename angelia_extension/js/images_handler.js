@@ -87,7 +87,7 @@
                     await new Promise(resolve => setTimeout(resolve, 2000)); // Attends 2 seconds
                 }
 
-            } while (response.status === 503); // repeats the handleQuery
+            } while (response.status === 503); // repeats the query
         } catch (error) {
             console.error('Error during the request API: ', error);
         }
