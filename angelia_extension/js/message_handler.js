@@ -124,7 +124,7 @@
 
         let urls_array = [];
 
-        for(element of filteredArray) //Element[2] contains news's url.
+        for(element of filteredArray) //Element[2] contains news url.
             urls_array.push(element[2]);
 
 
