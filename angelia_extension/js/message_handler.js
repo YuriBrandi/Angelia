@@ -1,16 +1,11 @@
 (function() {
-    console.log("running");
+    console.log("Angelia's content script loaded successfully");
 
 
-    /*var Sentiment = require(['index.js'], function(foo){
 
-    });*/
+    const BRAVE_URL = "https://api.search.brave.com/res/v1/web/search?q="
 
-    var Sentiment = require('sentiment');
-
-    const url = "https://api.search.brave.com/res/v1/web/search?q="
-
-    const options = {
+    const OPTIONS = {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -19,7 +14,7 @@
         }
     }
 
-    const trustedSites = [
+    const TRUSTED_SITES = [
         'www.nytimes.com',
         'www.wsj.com',
         'www.washingtonpost.com',
@@ -68,6 +63,33 @@
     window.hasRun = true;
 
 
+    async function loadWASMInterpreter(){
+
+        let pyodide = await loadPyodide();
+        const fileURL = browser.runtime.getURL('js/pyodide/textblob-0.17.1-py2.py3-none-any.whl');
+
+        // Fetch the contents of the file
+        return fetch(fileURL)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch file');
+                }
+                return response.url // Return the response body as text
+            })
+            .then(async file => {
+                await pyodide.loadPackage([file]);
+                await pyodide.loadPackage("nltk");
+
+                console.log("Python Interpreter and Libraries have all been loaded correctly ✓");
+                return pyodide;
+            })
+            .catch(error => {
+                console.error('Error fetching file:', error);
+                return error;
+            });
+
+    }
+
     function isTitleAffirmative(sentence) {
         sentence = sentence.toLowerCase();
         return !(sentence.includes('fake') || sentence.includes('false')
@@ -78,7 +100,7 @@
     function filterArrayByTrusted(array){
         let filteredHostnames = [];
         for(let element of array){
-            if(trustedSites.includes(element[0]))
+            if(TRUSTED_SITES.includes(element[0]))
                 filteredHostnames.push(element); //Push all array
         }
 
@@ -96,16 +118,19 @@
         return hostnames;
     }
 
-    function evaluateTrust(filteredArray, titleSentiment, titleAffirmation) {
+    function evaluateTrust(filteredArray, titleSentiment, titleAffirmation, interpreter) {
         /*
             Final negativity score = number of contradicting news/number of evaluated news.
          */
         let contradictory_score = 0;
-        
+
+        if(filteredArray.length == 0)
+            return -1; //Special score for no filtered result returned.
+
         for(let element of filteredArray){
-            //console.log(element);
-            let sentiment = getSentiment( //Element[1] contains news' title, Element[0] contains news' hostname.
-                tokenize(element[1], element[0].split('.'))); //extractDomain call not needed as element[0] is already a hostname.
+            console.log(element);
+            //Element[1] contains news' title, Element[0] contains news' hostname.
+            let sentiment = getSentiment(interpreter, cleanupTitleFromHostname(element[1], element[0]));
 
             //If sentiments are contradicting, then increase score.
             if((sentiment < 0 && titleSentiment > 0)
@@ -131,9 +156,7 @@
         
         console.log("Contradictory score: " + contradictory_score);
 
-        if(filteredArray.length == 0)
-            return 0;
-        
+
         return Math.round((contradictory_score/filteredArray.length)*100);
     }
 
@@ -150,7 +173,7 @@
          */
 
         console.log("Searching " + sentence.replace(/ /g, '+'));
-        let json_data = await fetch(url+sentence.replace(/ /g, '+'), options)
+        let json_data = await fetch(BRAVE_URL + sentence.replace(/ /g, '+'), OPTIONS)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -169,18 +192,32 @@
         return json_data
 
     }
-    function getSentiment(sentence) {
+    /*function getSentimentOLD(sentence) {
         var sentiment = new Sentiment();
         var result = sentiment.analyze(sentence);
 
         //console.log(result.comparative); // Outputs a sentiment score
         return result.comparative;
+    }*/
+
+
+    function getSentiment(interpreter, sentence) {
+
+
+         return interpreter.runPython(`
+                        from textblob import TextBlob
+                        blob = TextBlob("${sentence}")
+                        sentiment = blob.sentiment
+                        print(sentiment)
+                        sentiment.polarity
+                    `);
     }
-    function tokenize(title, domains) {
-        console.log("received " + domains);
+
+    function tokenize(title) {
+
 
         let tokenized_title = title.split(/\W+/).filter(function(token) {
-           return domains.indexOf(token.toLowerCase()) == -1 && token.length > 3;
+           return token.length > 3;
 
         });
 
@@ -188,16 +225,20 @@
         return tokenized_title.join(' '); //Transform to space separated sentence
     }
 
-    function extractDomains(url) {
-        try {
-            const parsedURL = new URL(url);
-            return parsedURL.hostname.split('.');
-        } catch (error) {
-            console.error('Error parsing URL:', error.message);
-            return null; // Return null or handle the error as needed
-        }
-    }
+    function cleanupTitleFromHostname(title, hostname) {
+        let domain = hostname.split('.');
+        console.log("received " + domain);
 
+        // Split the input string into words
+        let title_words = title.toLowerCase().split(/\s+/);
+
+        // Filter out words that are not in the domain array
+        let filteredWords = title_words.filter(word => !domain.includes(word));
+
+
+        return filteredWords.join(' ');
+
+    }
 
     /**
      * Listen for messages from the background script.
@@ -207,29 +248,39 @@
 
         if (message.command === "check_news") {
             console.log("message 'check_news' received");
-            let summarized_title = tokenize(message.news_title, extractDomains(message.news_url));
-
-            let original_sentiment =  getSentiment(summarized_title);
-
-            //do Google Search with Async function
-            doSearchQuery(summarized_title)
-                .then(data => {
-                    //Reduce the json to an array of [hostname, title]
-                    let simple_array = getSimplifiedArray(data);
-                    //console.log(hostnames);
-                    //Filter the array by Trusted Sites
-                    let filtered_array = filterArrayByTrusted(simple_array);
-
-                    //returns a negativity score.
-                    let neg_score = evaluateTrust(filtered_array, original_sentiment, isTitleAffirmative(message.news_title));
-                    console.log('negativity score: ' + neg_score);
-
-                    browser.runtime.sendMessage({
-                        command: "getNegScore",
-                        neg_score: neg_score
-                    });
 
 
+            loadWASMInterpreter()
+                .then(interpreter => {
+
+                   let pyodide = interpreter;
+
+                   let original_sentiment =  getSentiment(pyodide, message.news_title);
+
+                   console.log("Original sentiment: " + original_sentiment);
+
+                   let tokenized_title = tokenize(message.news_title);
+
+                    //do Brave Search with Async function
+                    doSearchQuery(tokenized_title)
+                        .then(data => {
+                            //Reduce the json to an array of [hostname, title]
+                            let simple_array = getSimplifiedArray(data);
+                            //console.log(hostnames);
+                            //Filter the array by Trusted Sites
+                            let filtered_array = filterArrayByTrusted(simple_array);
+
+                            //returns a negativity score.
+                            let neg_score = evaluateTrust(filtered_array, original_sentiment, isTitleAffirmative(message.news_title), pyodide);
+                            console.log('negativity score: ' + neg_score);
+
+                            browser.runtime.sendMessage({
+                                command: "getNegScore",
+                                neg_score: neg_score
+                            });
+
+
+                        });
                 });
 
         }

@@ -1,10 +1,3 @@
-/*const $ = selector => document.querySelector(selector);
-$("#find").addEventListener("click", () => {
-    console.log("ok");
-});*/
-
-//console.log("Test");
-
 getTitle();
 document.getElementById("do_btn").addEventListener("click", () => getActiveTab('check_news'));
 
@@ -63,9 +56,35 @@ function getActiveTab(action) {
 
 }
 
+function extractDomain(url) {
+    try {
+        const parsedURL = new URL(url);
+        return parsedURL.hostname.split('.');
+    } catch (error) {
+        console.error('Error parsing URL:', error.message);
+        return null; // Return null or handle the error as needed
+    }
+}
+
+function cleanupTitle(title, url) {
+    let domain = extractDomain(url);
+    console.log("received " + domain);
+
+    // Split the input string into words
+    const title_words = title.toLowerCase().split(/\s+/);
+
+    // Filter out words that are not in the domain array
+    const filteredWords = title_words.filter(word => !domain.includes(word));
+
+
+    return filteredWords.join(' ');
+
+}
+
 function changeTitleText(tabs) {
-    document.getElementById("title_txt").value = tabs[0].title;
-    document.getElementById("label_title").innerHTML = tabs[0].title;
+    let clean_title = cleanupTitle(tabs[0].title, tabs[0].url)
+    document.getElementById("title_txt").value = clean_title;
+    document.getElementById("label_title").innerHTML = clean_title;
 }
 
 function checkNews(tabs){
@@ -83,7 +102,7 @@ function checkNews(tabs){
  * Just log the error to the console.
  */
 function reportError(error) {
-    console.error(`Could not beastify: ${error}`);
+    console.error(`Could not execute extension: ${error}`);
 }
 
 
@@ -94,7 +113,7 @@ function reportError(error) {
 function reportExecuteScriptError(error) {
     //document.querySelector("#popup-content").classList.add("hidden");
     //document.querySelector("#error-content").classList.remove("hidden");
-    console.error(`Failed to execute beastify content script: ${error.message}`);
+    console.error(`Failed to execute Angelia's content script: ${error.message}`);
 }
 
 function reportExectureScriptSuccessful() {
@@ -107,6 +126,11 @@ browser.tabs.executeScript({file: "/js/message_handler.js"})
 
 browser.runtime.onMessage.addListener((message) => {
    if(message.command === "getNegScore") {
+       if(message.neg_score === -1){
+           document.getElementById("output").style.color = "red";
+           document.getElementById("output").innerHTML = "No results 😔";
+       }
+
        document.getElementById("output").innerHTML = "Negativity Score: " + message.neg_score + "/100";
    }
 });

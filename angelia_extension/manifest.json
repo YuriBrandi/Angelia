@@ -9,7 +9,8 @@
     "permissions": [
       "activeTab",
       "webRequest",
-      "https://api.search.brave.com/res/v1/web/search"
+      "https://api.search.brave.com/res/v1/web/search",
+      "storage"
     ],
 
     "icons": {
@@ -30,7 +31,7 @@
           "<all_urls>"
         ],
         "js": [
-          "js/require.js", "js/sentiment_bundled.js"
+          "js/pyodide/pyodide.js"
         ],
         "run_at": "document_end"
       }
