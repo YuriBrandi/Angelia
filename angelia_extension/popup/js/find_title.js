@@ -175,7 +175,7 @@ browser.runtime.onMessage.addListener((message) => {
        }
        else if(message.neg_score > 50){
            output_txt.style.color = "red";
-           output_txt.innerHTML = "Mostly Fake ";
+           output_txt.innerHTML = "Most Likely Fake ";
        }
 
 

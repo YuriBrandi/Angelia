@@ -112,21 +112,25 @@
     function getSimplifiedArray(jsonResults) {
         let hostnames = [];
         for(let i = 0; i < jsonResults.web.results.length; i++)
-            hostnames.push([jsonResults.web.results[i].meta_url.hostname, jsonResults.web.results[i].title]);
+            hostnames.push([jsonResults.web.results[i].meta_url.hostname, jsonResults.web.results[i].title,
+                jsonResults.web.results[i].url]);
             //console.log(jsonResults.web.results[i].meta_url.hostname); Debug
 
         console.log("# Total entries: " + hostnames.length);
         return hostnames;
     }
 
-    function sendNewsURLs(jsonResults) {
-        let urls = [];
-        for(let i = 0; i < jsonResults.web.results.length; i++)
-            urls.push(jsonResults.web.results[i].url);
+    function sendNewsURLs(filteredArray) {
+
+        let urls_array = [];
+
+        for(element of filteredArray) //Element[2] contains news's url.
+            urls_array.push(element[2]);
+
 
         browser.runtime.sendMessage({
             command: "getFilteredURLs",
-            filteredURLs: urls
+            filteredURLs: urls_array
         });
 
     }
@@ -282,10 +286,12 @@
                             let simple_array = getSimplifiedArray(data);
                             //console.log(hostnames);
 
-                            //send URLs
-                            sendNewsURLs(data);
+
                             //Filter the array by Trusted Sites
                             let filtered_array = filterArrayByTrusted(simple_array);
+
+                            //send URLs
+                            sendNewsURLs(filtered_array);
 
                             //returns a negativity score.
                             let neg_score = evaluateTrust(filtered_array, original_sentiment, isTitleAffirmative(message.news_title), pyodide);
