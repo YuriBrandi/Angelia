@@ -2,7 +2,12 @@ getTitle();
 document.getElementById("do_btn").addEventListener("click", () => getActiveTab('check_news'));
 
 document.getElementsByClassName("edit")[0].addEventListener("click", function (){
-    document.getElementById("title_txt").style.display = "inline";
+    let text_area = document.getElementById("title_txt");
+    text_area.style.display = "inline";
+    text_area.style.height = "auto";
+
+    text_area.style.height = text_area.scrollHeight + "px";
+
     document.getElementById("label_title").style.display = "none";
 
     document.getElementsByClassName("edit")[0].style.display = "none";
@@ -67,11 +72,13 @@ function extractDomain(url) {
 }
 
 function cleanupTitle(title, url) {
+    nocomma_title = title.replace(/"/g, "");
+
     let domain = extractDomain(url);
     console.log("received " + domain);
 
     // Split the input string into words
-    const title_words = title.toLowerCase().split(/\s+/);
+    const title_words = nocomma_title.toLowerCase().split(/\s+/);
 
     // Filter out words that are not in the domain array
     const filteredWords = title_words.filter(word => !domain.includes(word));
@@ -89,12 +96,17 @@ function changeTitleText(tabs) {
 
 function checkNews(tabs){
 
-    console.log("Message sent");
     browser.tabs.sendMessage(tabs[0].id, {
         command: "check_news",
         news_title: document.getElementById("label_title").innerHTML,
         news_url: tabs[0].url
     });
+
+    console.log("Message sent");
+
+    document.getElementById("do_btn").style.display = "none";
+    document.getElementById("loading_circle").style.display = "inline";
+    document.getElementById("urls").innerHTML = "";
 
 }
 
@@ -126,11 +138,50 @@ browser.tabs.executeScript({file: "/js/message_handler.js"})
 
 browser.runtime.onMessage.addListener((message) => {
    if(message.command === "getNegScore") {
+       document.getElementById("do_btn").style.display = "inline";
+       document.getElementById("loading_circle").style.display = "none";
+
+       console.log("Negativity score: " + message.neg_score + "/100");
+       let output_txt = document.getElementById("output")
+
        if(message.neg_score === -1){
-           document.getElementById("output").style.color = "red";
-           document.getElementById("output").innerHTML = "No results 😔";
+           output_txt.style.color = "red";
+           output_txt.innerHTML = "No results found 😔";
+       }
+       else if(message.neg_score === 0){
+           output_txt.style.color = "green";
+           output_txt.innerHTML = "Trustable ";
+       }
+       else if(message.neg_score < 25){
+           output_txt.style.color = "yellow";
+           output_txt.innerHTML = "Likely Trustable ";
+       }
+       else if(message.neg_score < 50){
+           output_txt.style.color = "orange";
+           output_txt.innerHTML = "Likely Fake ";
+       }
+       else if(message.neg_score > 75){
+           output_txt.style.color = "red";
+           output_txt.innerHTML = "Fake! ";
+       }
+       else if(message.neg_score > 50){
+           output_txt.style.color = "red";
+           output_txt.innerHTML = "Mostly Fake ";
        }
 
-       document.getElementById("output").innerHTML = "Negativity Score: " + message.neg_score + "/100";
+
+   }
+   else if(message.command === "getFilteredURLs"){
+       for(let element of message.filteredURLs){
+           let anchor = document.createElement("a");
+           anchor.href = element;
+           anchor.innerHTML = element;
+
+           document.getElementById("urls").appendChild(anchor);
+           document.getElementById("urls").appendChild(document.createElement("br"));
+
+           if(element !== message.filteredURLs[message.filteredURLs.length - 1])
+               document.getElementById("urls").appendChild(document.createElement("br"));
+       }
    }
 });

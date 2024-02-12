@@ -5,6 +5,7 @@
 
     const BRAVE_URL = "https://api.search.brave.com/res/v1/web/search?q="
 
+
     const OPTIONS = {
         method: 'GET',
         headers: {
@@ -118,6 +119,18 @@
         return hostnames;
     }
 
+    function sendNewsURLs(jsonResults) {
+        let urls = [];
+        for(let i = 0; i < jsonResults.web.results.length; i++)
+            urls.push(jsonResults.web.results[i].url);
+
+        browser.runtime.sendMessage({
+            command: "getFilteredURLs",
+            filteredURLs: urls
+        });
+
+    }
+
     function evaluateTrust(filteredArray, titleSentiment, titleAffirmation, interpreter) {
         /*
             Final negativity score = number of contradicting news/number of evaluated news.
@@ -192,14 +205,6 @@
         return json_data
 
     }
-    /*function getSentimentOLD(sentence) {
-        var sentiment = new Sentiment();
-        var result = sentiment.analyze(sentence);
-
-        //console.log(result.comparative); // Outputs a sentiment score
-        return result.comparative;
-    }*/
-
 
     function getSentiment(interpreter, sentence) {
 
@@ -226,11 +231,12 @@
     }
 
     function cleanupTitleFromHostname(title, hostname) {
+        nocomma_title = title.replace(/"/g, "");
         let domain = hostname.split('.');
         console.log("received " + domain);
 
         // Split the input string into words
-        let title_words = title.toLowerCase().split(/\s+/);
+        let title_words = nocomma_title.toLowerCase().split(/\s+/);
 
         // Filter out words that are not in the domain array
         let filteredWords = title_words.filter(word => !domain.includes(word));
@@ -267,6 +273,9 @@
                             //Reduce the json to an array of [hostname, title]
                             let simple_array = getSimplifiedArray(data);
                             //console.log(hostnames);
+
+                            //send URLs
+                            sendNewsURLs(data);
                             //Filter the array by Trusted Sites
                             let filtered_array = filterArrayByTrusted(simple_array);
 
@@ -278,9 +287,9 @@
                                 command: "getNegScore",
                                 neg_score: neg_score
                             });
-
-
                         });
+
+                    //performSearch(tokenized_title);
                 });
 
         }

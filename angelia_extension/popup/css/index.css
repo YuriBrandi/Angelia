@@ -39,6 +39,12 @@ body {
 #title_txt {
   text-align: center;
   display: none;
+  font-size: 1.1rem;
+  resize: none;
+  max-height: 130px;
+
+  border-radius: 9px;
+  padding: .5rem 1rem;
 }
 
 button {
@@ -59,6 +65,10 @@ button:hover {
   box-shadow: none;
 }
 
+#loading_circle {
+  height: 4rem;
+  display: none;
+}
 .edit {
   padding: .3rem;
   font-size: .5rem;
@@ -76,31 +86,16 @@ button:hover {
   filter: invert();
 }
 
-#tip_container {
-  display: inline-block;
-}
-
-#tip_container > img {
-  filter: invert();
-}
-
-#tip {
-  display: none;
-  font-size: .5rem;
-  text-align: center;
-
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
-}
-
-#tip_container > img:hover + #tip {
-  display: inline;
-}
-
 #output {
   text-align: center;
+}
+
+#urls {
+  text-align: left;
   margin-bottom: 5rem;
+  font-size: 1rem;
+  max-height: 80px;
+  overflow:scroll
 }
 
 footer {

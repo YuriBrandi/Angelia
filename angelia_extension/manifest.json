@@ -10,7 +10,7 @@
       "activeTab",
       "webRequest",
       "https://api.search.brave.com/res/v1/web/search",
-      "storage"
+      "https://www.googleapis.com/customsearch/v1"
     ],
 
     "icons": {

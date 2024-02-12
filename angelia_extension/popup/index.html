@@ -15,13 +15,8 @@
 <div class="container">
   <div class="row">
     <span class="label">Detected title:</span>
-    <span id="label_title"></span>
-    <input type="text" id="title_txt">
-
-    <div id="tip_container">
-      <img src="imgs/info.svg">
-      <span id="tip">Don't worry, special characters and site's name in the title will be automatically ignored.</span>
-    </div>
+    <span id="label_title"></span> </br>
+    <textarea id="title_txt" cols="50"></textarea>
 
     <button class="edit"><img src="imgs/edit.svg"></button>
     <button class="edit"><img src="imgs/done.svg"></button>
@@ -31,7 +26,12 @@
     <button id="do_btn">Get trust score!</button>
   </div>
   <div class="row">
+    <img id="loading_circle" src="imgs/loading.svg">
+  </div>
+  <div class="row">
     <p id="output"></p>
+  </div>
+  <div class="row" id="urls">
   </div>
   <footer>Angelia &copy; 2024. Raffaele Aurucci, Lukasz Gajewski, Yuri Brandi.</footer>
 </div>
