@@ -54,20 +54,19 @@ Finally, the extension has a beta functionality to detect **AI images** inside n
 
 Since it is still in an early stage development, at the moment *Angelia* is still not available in the Extensions store. But we plan to migrate to Manifest v3 and to port the work to *Chromium* browsers soon.
 
-Simply **clone this repo** (you can use GitHub's interface as well).
- ```bash 
-git clone https://github.com/YuriBrandi/Angelia.git
-```
+Simply **Download the .zip** in the *Releases* section, alternatively you can **clone this repo**.
 
-The extensions uses the [Brave Search API](https://brave.com/search/api/) to look for news,
+**Then:**
+
+- The extensions uses the [Brave Search API](https://brave.com/search/api/) to look for news,
 please remember to insert a subscription token in ```Angelia/angelia_extension/js/message_handler.js``` *(line 18)* to make the API calls work.
 Getting an API token is fairly simple and also free https://brave.com/search/api/.
 
-The extensions uses the [Hugging Face API](https://huggingface.co/docs/api-inference/quicktour) to detect AI images inside news,
-please remember to insert a subscription token in ```Angelia/angelia_extension/js/images_handler.js``` *(line 79)* to make the API calls work.
-Getting an API token is fairly simple and also free https://huggingface.co/docs/api-inference.
+- Angelia also uses the [Hugging Face API](https://huggingface.co/docs/api-inference/quicktour) to detect AI images inside news,
+please remember to insert a subscription token in ```Angelia/angelia_extension/js/images_handler.js``` *(line 79)* to make the API calls work *(you can skip this step if not interested in this feature)*
+As for Brave, an Hugging Face API token is also free to get https://huggingface.co/docs/api-inference.
 
-Please feel free to try different APIs and let us know :).
+Please feel free to try implementing different APIs and let us know :).
 
 Finally go to ```about:debugging``` in your Firefox (or Firefox-based) browser and add the extension from ```Angelia/angelia_extension/manifest.json```.
 
