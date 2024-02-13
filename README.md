@@ -42,7 +42,7 @@ This work will be followed by a scientific paper, thus technical information won
 
 The reliability evaluation module is in continuous development. At the moment, the polarity of each news is compared and a negativity score is given, which results in a textual outcome (e.g. *Likely Fake*, *Trustable* ...). When faced with negative-polarity comparisons, the extensions checks for words of disagreement such as *"No, ..."* Or *"Fake ..."*.
 
-The sentiment analysis module is powered by the ![Pyodide](https://github.com/pyodide/pyodide) interpreter, customized and lightened to the bare minimum to offer a fast and serverless experience. All the libraries are already included in the extension and no external resource is fetched.
+The sentiment analysis module is powered by the ![Pyodide](https://github.com/pyodide/pyodide) interpreter, customized and lightened to the bare minimum to offer a fast and serverless experience. All the libraries come already included in the extension and no external resource is fetched.
 
 ## Installing the extension 
 
