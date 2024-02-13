@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Angelia",
-    "version": "1.0",
+    "version": "0.2",
   
     "description": "A Fake news detector based on NLP Machine Learning models.",
     "homepage_url": "https://github.com/YuriBrandi/Angelia",
