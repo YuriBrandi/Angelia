@@ -44,11 +44,11 @@ The reliability evaluation module is in continuous development. At the moment, t
 
 The sentiment analysis module is powered by the [Pyodide](https://github.com/pyodide/pyodide) interpreter, customized and lightened to the bare minimum to offer a fast and serverless experience. All the libraries come already included in the extension and no external resource is fetched.
 
-Finally, the extension has a beta functionality to detect **AI images** inside news. In this case Angelia:
+Finally, Angelia comes with an experimental functionality to detect **AI synthetic images** inside web pages. In this case the extension:
 
 1. Extracts all images from HTML page and relative src.
-2. Execute a request for each image's url using a free [Proxy](https://corsproxy.io/) for bypass CORS policy.
-3. Each image's format is checked by blob and send it to [SDXL Detector Model](https://huggingface.co/Organika/sdxl-detector) hosted in Hugging Face. 
+2. Executes a request for each image's url using a free [Proxy](https://corsproxy.io/).
+3. Each image's format is checked by blob and sent to the [SDXL Detector Model](https://huggingface.co/Organika/sdxl-detector) hosted in Hugging Face. 
 
 ## Installing the extension 
 
