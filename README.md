@@ -47,7 +47,7 @@ The sentiment analysis module is powered by the [Pyodide](https://github.com/pyo
 Finally, the extension has a beta functionality to detect **AI images** inside news. In this case Angelia:
 
 1. Extracts all images from HTML page and relative src.
-2. Execute a request for each images' url using a free [Proxy](https://corsproxy.io/) for bypass CORS policy.
+2. Execute a request for each image's url using a free [Proxy](https://corsproxy.io/) for bypass CORS policy.
 3. Each image's format is checked by blob and send it to [SDXL Detector Model](https://huggingface.co/Organika/sdxl-detector) hosted in Hugging Face. 
 
 ## Installing the extension 
