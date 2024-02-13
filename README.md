@@ -42,7 +42,13 @@ This work will be followed by a scientific paper, thus technical information won
 
 The reliability evaluation module is in continuous development. At the moment, the polarity of each news is compared and a negativity score is given, which results in a textual outcome (e.g. *Likely Fake*, *Trustable* ...). When faced with negative-polarity comparisons, the extensions checks for words of disagreement such as *"No, ..."* Or *"Fake ..."*.
 
-The sentiment analysis module is powered by the ![Pyodide](https://github.com/pyodide/pyodide) interpreter, customized and lightened to the bare minimum to offer a fast and serverless experience. All the libraries come already included in the extension and no external resource is fetched.
+The sentiment analysis module is powered by the [Pyodide](https://github.com/pyodide/pyodide) interpreter, customized and lightened to the bare minimum to offer a fast and serverless experience. All the libraries come already included in the extension and no external resource is fetched.
+
+Finally, the extension has a beta functionality to detect **AI images** inside news. In this case Angelia:
+
+1. Extracts all images from HTML page and relative src.
+2. Execute a request for each images' url using a free [Proxy](https://corsproxy.io/) for bypass CORS policy.
+3. Each image's format is checked by blob and send it to [SDXL Detector Model](https://huggingface.co/Organika/sdxl-detector) hosted in Hugging Face. 
 
 ## Installing the extension 
 
@@ -56,6 +62,10 @@ git clone https://github.com/YuriBrandi/Angelia.git
 The extensions uses the [Brave Search API](https://brave.com/search/api/) to look for news,
 please remember to insert a subscription token in ```Angelia/angelia_extension/js/message_handler.js``` *(line 18)* to make the API calls work.
 Getting an API token is fairly simple and also free https://brave.com/search/api/.
+
+The extensions uses the [Hugging Face API](https://huggingface.co/docs/api-inference/quicktour) to detect AI images inside news,
+please remember to insert a subscription token in ```Angelia/angelia_extension/js/images_handler.js``` *(line 79)* to make the API calls work.
+Getting an API token is fairly simple and also free https://huggingface.co/docs/api-inference.
 
 Please feel free to try different APIs and let us know :).
 
