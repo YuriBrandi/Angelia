@@ -32,7 +32,7 @@ This work will be followed by a scientific paper, thus technical information won
 - A Title Extraction module
 - A Reliability Evaluation module
 
-#### Note: All these modules are exectued in local and require no external requests.
+#### Note: All these modules are exectued in local and require no external requests (no CDN is used).
 
 ![Angelia-EnglishW](https://github.com/YuriBrandi/Angelia/assets/52039988/d11fe413-e9fe-46cd-95db-cb13eaf21fb1)
 
