@@ -127,7 +127,7 @@
     async function checkFormatImage(blob, imageUrl, imgTag) {
 
         const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/gif', 'image/tiff', 'image/bmp',
-            'image/vnd.microsoft.icon', 'image/svg+xml']
+            'image/vnd.microsoft.icon']
 
         // console.log(blob.type)
 
@@ -137,13 +137,13 @@
                     || blob.type === 'text/html;charset=utf-8' || blob.type === 'text/plain'
                     || blob.type === 'text/html; charset=iso-8859-1' || (imgTag.width === 1 && imgTag.height === 1))
                     return Promise.resolve('not-valid');
+                else if (blob.type === 'image/svg+xml')
+                    return convertSVG(imgTag);
                 else
                     return await convertImageOtherFormats(blob);
             } catch (error) {
                 return Promise.resolve('error');
             }
-        } else if (blob.type === 'image/svg+xml'){
-            return convertSVG(imgTag);
         }
 
         // return null if the type is consented
