@@ -9,7 +9,9 @@
 ### Authors
 [@raffaele-aurucci](https://github.com/raffaele-aurucci), [@LukaszG92](https://github.com/LukaszG92), [@YuriBrandi](https://github.com/YuriBrandi).
 
-This University work consists of an in-depth study and a fully working *privacy-oriented*, *opensource*, *lightweight* browser extension that allows to **verify** *Fake news' titles* and *AI synthetic images*. It is inspired by the earlier paper [ConvNet frameworks for multi-modal fake news detection](https://link.springer.com/article/10.1007/s10489-021-02345-y), which uses trusted sources and polarity analysis for fake news detection.
+This University work consists of an in-depth study and a fully working *privacy-oriented*, *opensource*, *lightweight* browser extension that allows to **verify** *Fake news' titles* and *AI synthetic images*. 
+
+It is inspired by the earlier paper [ConvNet frameworks for multi-modal fake news detection](https://link.springer.com/article/10.1007/s10489-021-02345-y), which uses trusted sources and polarity analysis for fake news detection.
 
 ## Contributions
 
