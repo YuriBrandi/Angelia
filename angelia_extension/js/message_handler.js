@@ -48,7 +48,19 @@
         'www.snopes.com',
         'www.huffpost.com',
         'www.foxnews.com',
-        'www.dailymail.co.uk'
+        'www.dailymail.co.uk',
+        'www.avclub.com',
+        'www.bandcamp.com',
+        'www.vulture.com',
+        'www.pitchfork.com',
+        'www.rollingstone.com',
+        'www.upworthy.com',
+        'www.variety.com',
+        'www.vibe.com',
+        'www.deadline.com',
+        'www.heavy.com',
+        'www.indiewire.com',
+        'www.imdb.com'
     ];
 
     //const natural = require('natural');
