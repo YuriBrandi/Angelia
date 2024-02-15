@@ -172,7 +172,7 @@
             if((sentiment < 0 && titleSentiment > 0)
                 || (sentiment > 0 && titleSentiment < 0))
                 contradictory_score++;
-            
+
 
             /*
                 From our study, titles can be both negative but still contradicting
@@ -189,9 +189,9 @@
                 contradictory_score++;
 
         }
-        
+
         console.log("Contradictory score: " + contradictory_score);
-        console.log("Neutrality score: " + contradictory_score);
+        console.log("Neutrality score: " + neutrality_score);
 
         if(neutrality_score === filteredArray.length)
             return -2;
@@ -300,6 +300,7 @@
                            command: "getNegScore",
                            neg_score: -2
                        });
+                       return;
                    }
 
                    let tokenized_title = tokenize(message.news_title);

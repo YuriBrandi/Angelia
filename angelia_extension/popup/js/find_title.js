@@ -181,7 +181,8 @@ browser.runtime.onMessage.addListener((message) => {
            output_txt.innerHTML = "Fake! ";
        }
 
-        output_txt.innerHTML += message.neg_score + "/100";
+       if(message.neg_score >= 0)
+            output_txt.innerHTML += message.neg_score + "/100";
    }
    else if(message.command === "getFilteredURLs"){
        for(let element of message.filteredURLs){
