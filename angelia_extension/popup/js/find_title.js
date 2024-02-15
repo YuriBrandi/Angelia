@@ -161,24 +161,24 @@ browser.runtime.onMessage.addListener((message) => {
            output_txt.style.color = "green";
            output_txt.innerHTML = "Trustable ";
        }
-       else if(message.neg_score < 25){
+       else if(message.neg_score <= 25){
            output_txt.style.color = "yellow";
            output_txt.innerHTML = "Likely Trustable ";
        }
-       else if(message.neg_score < 50){
+       else if(message.neg_score <= 50){
            output_txt.style.color = "orange";
            output_txt.innerHTML = "Likely Fake ";
        }
-       else if(message.neg_score > 75){
-           output_txt.style.color = "red";
-           output_txt.innerHTML = "Fake! ";
-       }
-       else if(message.neg_score > 50){
+       else if(message.neg_score <= 75){
            output_txt.style.color = "red";
            output_txt.innerHTML = "Most Likely Fake ";
        }
+       else { //<= 100
+           output_txt.style.color = "red";
+           output_txt.innerHTML = "Fake! ";
+       }
 
-
+        output_txt.innerHTML += message.neg_score + "/100";
    }
    else if(message.command === "getFilteredURLs"){
        for(let element of message.filteredURLs){
