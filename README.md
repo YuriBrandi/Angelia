@@ -46,11 +46,18 @@ The reliability evaluation module is in continuous development. At the moment, t
 
 The sentiment analysis module is powered by the [Pyodide](https://github.com/pyodide/pyodide) interpreter, customized and lightened to the bare minimum to offer a fast and serverless experience. All the libraries come already included in the extension and no external resource is fetched.
 
-Finally, Angelia comes with an experimental functionality to detect **AI synthetic images** inside web pages. In this case the extension:
+Finally, Angelia comes with an experimental functionality to detect **AI synthetic images** inside web pages. In this case the extension has 3 main modules:
 
-1. Extracts all images from HTML page and relative src.
+- Converter Image's Format module
+- Image's Format Evaluation module
+- AI Image Detector module
+
+![AngeliaImages-English](https://github.com/YuriBrandi/Angelia/assets/114738583/809608dd-7963-4de4-82f2-cd3950d78e34)
+
+1. The extension extracts all images from HTML page and relative URLs.
 2. Executes a request for each image's url using a free [Proxy](https://corsproxy.io/).
-3. Each image's format is checked by MIME type and sent via BLOB format to the [SDXL Detector Model](https://huggingface.co/Organika/sdxl-detector) hosted in Hugging Face.
+3. Each image's format is checked by MIME type and sent via BLOB format to the [SDXL Detector Model](https://huggingface.co/Organika/sdxl-detector) hosted in Hugging Face, using the API.
+4. If the image's format is invalid for classification, the extension draw the images into HTML page using a canvas, and converts all in *image/png*. Next it obtains new BLOB by this new images and relative URLs, ready for sent to the model hosted in Hugging Face.
 
 #### Note: False positives might sometimes occur, therefore please manually double-check an image before judging its authenticity.
 
