@@ -153,7 +153,10 @@ browser.runtime.onMessage.addListener((message) => {
        console.log("Negativity score: " + message.neg_score + "/100");
        let output_txt = document.getElementById("output")
 
-       if(message.neg_score === -1){
+       if(message.neg_score === -2){
+           output_txt.innerHTML = "Due to title extraction limits, we cannot analyze this news.";
+       }
+       else if(message.neg_score === -1){
            output_txt.style.color = "red";
            output_txt.innerHTML = "No results found 😔";
        }

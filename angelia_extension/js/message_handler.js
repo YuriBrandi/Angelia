@@ -153,6 +153,8 @@
          */
         let contradictory_score = 0;
 
+        let neutrality_score = 0;
+
         if(filteredArray.length == 0)
             return -1; //Special score for no filtered result returned.
 
@@ -160,6 +162,11 @@
             console.log(element);
             //Element[1] contains news' title, Element[0] contains news' hostname.
             let sentiment = getSentiment(interpreter, cleanupTitleFromHostname(element[1], element[0]));
+
+            if(sentiment === 0){
+                neutrality_score++;
+                continue;
+            }
 
             //If sentiments are contradicting, then increase score.
             if((sentiment < 0 && titleSentiment > 0)
@@ -184,9 +191,14 @@
         }
         
         console.log("Contradictory score: " + contradictory_score);
+        console.log("Neutrality score: " + contradictory_score);
+
+        if(neutrality_score === filteredArray.length)
+            return -2;
 
 
-        return Math.round((contradictory_score/filteredArray.length)*100);
+
+        return Math.round((contradictory_score/(filteredArray.length - neutrality_score))*100);
     }
 
     async function doSearchQuery(sentence) {
@@ -282,6 +294,13 @@
                    let original_sentiment =  getSentiment(pyodide, message.news_title);
 
                    console.log("Original sentiment: " + original_sentiment);
+
+                   if(original_sentiment === 0){
+                       browser.runtime.sendMessage({
+                           command: "getNegScore",
+                           neg_score: -2
+                       });
+                   }
 
                    let tokenized_title = tokenize(message.news_title);
 
