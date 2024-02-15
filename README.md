@@ -48,8 +48,8 @@ The sentiment analysis module is powered by the [Pyodide](https://github.com/pyo
 
 Finally, Angelia comes with an experimental functionality to detect **AI synthetic images** inside web pages. In this case the extension has 3 main modules:
 
-- Converter Image's Format module
 - Image's Format Evaluation module
+- Converter Image's Format module
 - AI Image Detector module
 
 ![AngeliaImages-English](https://github.com/YuriBrandi/Angelia/assets/114738583/809608dd-7963-4de4-82f2-cd3950d78e34)
