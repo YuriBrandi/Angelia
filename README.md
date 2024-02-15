@@ -50,7 +50,9 @@ Finally, Angelia comes with an experimental functionality to detect **AI synthet
 
 1. Extracts all images from HTML page and relative src.
 2. Executes a request for each image's url using a free [Proxy](https://corsproxy.io/).
-3. Each image's format is checked by blob and sent to the [SDXL Detector Model](https://huggingface.co/Organika/sdxl-detector) hosted in Hugging Face. 
+3. Each image's format is checked by MIME type and sent via BLOB format to the [SDXL Detector Model](https://huggingface.co/Organika/sdxl-detector) hosted in Hugging Face.
+
+#### Note: The false positive rate is always present, therefore checked manually the authenticity of each image to be sure.
 
 ## Installing the extension 
 
