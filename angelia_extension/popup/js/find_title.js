@@ -158,7 +158,7 @@ browser.runtime.onMessage.addListener((message) => {
        }
        else if(message.neg_score === -1){
            output_txt.style.color = "red";
-           output_txt.innerHTML = "No results found 😔";
+           output_txt.innerHTML = "Fake!";
        }
        else if(message.neg_score === 0){
            output_txt.style.color = "green";
