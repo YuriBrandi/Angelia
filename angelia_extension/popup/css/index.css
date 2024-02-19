@@ -44,6 +44,7 @@ body {
   max-height: 130px;
 
   border-radius: 9px;
+  border: none;
   padding: .5rem 1rem;
 }
 
@@ -117,7 +118,7 @@ button:hover {
   text-align: left;
   font-size: 1rem;
   max-height: 80px;
-  overflow:scroll
+  overflow:scroll;
 }
 
 footer {
@@ -146,11 +147,27 @@ footer {
 }
 
 @media (prefers-color-scheme: light) {
-  button {
-    background: #eef;
+
+  .container {
+    color: black;
   }
 
-  button:hover {
-    background: #cce;
+  button {
+    background-color: #e7eaf2;
+    color: black;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
   }
+
+  .edit > img {
+    filter: none;
+  }
+
+  #loading_circle {
+    filter: invert();
+  }
+
+  #title_txt {
+    background-color: #eee;
+  }
+
 }
