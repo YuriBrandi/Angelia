@@ -1,6 +1,6 @@
 # Angelia (/aŋ.ɟeˈli.a/):
 
-### An open-source lightweight Fake news detector based on NLP Machine Learning models.
+### An open-source, lightweight Fake news detector based on NLP Machine Learning models.
 
 <p align='center'> 
     <img src=https://github.com/YuriBrandi/Angelia/assets/52039988/fe187280-24c1-4878-b211-98daf4e485d4 width=200>
