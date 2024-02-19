@@ -152,13 +152,14 @@ browser.runtime.onMessage.addListener((message) => {
 
        console.log("Negativity score: " + message.neg_score + "/100");
        let output_txt = document.getElementById("output")
+       output_txt.style.color = "initial";
 
        if(message.neg_score === -2){
            output_txt.innerHTML = "Due to title extraction limits, we cannot analyze this news.";
        }
        else if(message.neg_score === -1){
            output_txt.style.color = "red";
-           output_txt.innerHTML = "Fake!";
+           output_txt.innerHTML = "No results found 😔";
        }
        else if(message.neg_score === 0){
            output_txt.style.color = "green";
@@ -182,7 +183,7 @@ browser.runtime.onMessage.addListener((message) => {
        }
 
        if(message.neg_score >= 0)
-            output_txt.innerHTML += message.neg_score + "/100";
+            output_txt.innerHTML += "(" + message.neg_score + "/100)";
    }
    else if(message.command === "getFilteredURLs"){
        for(let element of message.filteredURLs){

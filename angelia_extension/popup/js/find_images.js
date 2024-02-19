@@ -2,7 +2,7 @@ document.getElementById('do_img').addEventListener('click', function() {
 
     document.getElementById("urls").innerHTML = ""
     document.getElementById('output').innerHTML = ""
-    document.getElementById('output').style.color = "white";
+    document.getElementById('output').style.color = "initial";
 
     document.getElementById('do_img').style.display = 'none'
     document.getElementById('do_btn').style.display = 'none'
