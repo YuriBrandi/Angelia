@@ -168,9 +168,8 @@
                 continue;
             }
 
-            //If sentiments are contradicting, then increase score.
-            if((sentiment < 0 && titleSentiment > 0)
-                || (sentiment > 0 && titleSentiment < 0))
+            //If sentiments score are of opposed value, then increase the contradictory score.
+            if(sentiment * titleSentiment < 0)
                 contradictory_score++;
 
 
@@ -195,8 +194,6 @@
 
         if(neutrality_score === filteredArray.length)
             return -2;
-
-
 
         return Math.round((contradictory_score/(filteredArray.length - neutrality_score))*100);
     }
