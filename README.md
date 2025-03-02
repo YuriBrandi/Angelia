@@ -10,6 +10,11 @@ This University work consists of an in-depth study and a fully working *privacy-
 
 It is inspired by the earlier paper [ConvNet frameworks for multi-modal fake news detection](https://link.springer.com/article/10.1007/s10489-021-02345-y), which uses trusted sources and polarity analysis for fake news detection.
 
+### Paper
+The study this work is based on is now available as a **Paper** https://link.springer.com/chapter/10.1007/978-3-031-73997-2_11
+
+Thus 
+
 ### Authors
 [@raffaele-aurucci](https://github.com/raffaele-aurucci), [@LukaszG92](https://github.com/LukaszG92), [@YuriBrandi](https://github.com/YuriBrandi).
 
@@ -19,13 +24,11 @@ Contributions are very much appreciated. Please well describe your changes insid
 
 If you encounter any problem or bug that is unrelated with your own machine, please report it and *open a new issue* with replicable steps. 
 
-## Workflow
+## Method overview
 
 <p align='center'> 
     <img width="589" src="https://github.com/YuriBrandi/Angelia/assets/52039988/1c90020c-4805-46e9-b784-0c4f5b48e4e7">
 </p>
-
-This work will be followed by a scientific paper, thus technical information won't be covered in this readme.
 
 *Angelia* consist of 4 main modules:
 
